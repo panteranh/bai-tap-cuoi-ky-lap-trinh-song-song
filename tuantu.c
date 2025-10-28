@@ -1,17 +1,59 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+void insertionSortAscending(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+void insertionSortDescending(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] < key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
 
 int main() {
-    double m = 0.05;
-    double q = 2e-6;
-    double g = 9.8;
-    double alpha = 15.0;
+    int N;
+    printf("Nhap so luong phan tu N: ");
+    scanf("%d", &N);
 
-    double rad = alpha * M_PI / 180.0;
+    int arr[N];
+    srand(time(NULL));
 
-    double E = (m * g * tan(rad)) / q;
+    for (int i = 0; i < N; i++) {
+        arr[i] = rand() % 100;
+    }
 
-    printf("Cuong do dien truong E = %.2f V/m\n", E);
+    printf("\nMang ban dau: ");
+    printArray(arr, N);
+
+    insertionSortAscending(arr, N);
+    printf("\nMang sap xep tang dan: ");
+    printArray(arr, N);
+
+    insertionSortDescending(arr, N);
+    printf("\nMang sap xep giam dan: ");
+    printArray(arr, N);
 
     return 0;
 }
